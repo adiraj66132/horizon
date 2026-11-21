@@ -440,16 +440,6 @@ impl Game<'_> {
                 velocity,
             );
         }
-        // Older releases (1.21.x and before) send only this event, carrying the
-        // glass-break sound with it; 26.3 sends it separately as 1053/1054.
-        // Playing it here covers both, and 1053/1054 no longer play it again.
-        let pitch = self.particles.level_random().next_float() * 0.1 + 0.9;
-        self.audio.play_unshared(
-            "minecraft:entity.splash_potion.break",
-            Some(at),
-            1.0,
-            pitch,
-        );
     }
     /// Queue and play level event `id` at `pos` (`Level.levelEvent`).
     pub(super) fn level_event_at(&mut self, id: i32, pos: [i32; 3], data: i32) {

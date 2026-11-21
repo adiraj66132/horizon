@@ -3411,9 +3411,8 @@ impl Game<'_> {
                         1043 => Some(("minecraft:item.book.page_turn", 1.0)),
                         // LevelEvent.SOUND_PHANTOM_BITE: a phantom's bite.
                         1039 => Some(("minecraft:entity.phantom.bite", 0.3)),
-                        // LevelEvent.SOUND_SPLASH_POTION and its instant twin: the break
-                        // sound is played by potion_splash_particles (2002/2007) so older
-                        // releases that send only those events still hear it.
+                        // LevelEvent.SOUND_SPLASH_POTION and its instant twin.
+                        1053 | 1054 => Some(("minecraft:entity.splash_potion.break", 1.0)),
                         _ => None,
                     };
                     if let Some((name, volume)) = sound {
@@ -3429,7 +3428,7 @@ impl Game<'_> {
                                 let r = self.particles.level_random();
                                 2.6 + (r.next_float() - r.next_float()) * 0.8
                             }
-                            1039 | 1045 | 1046 | 1047 | 1052 => {
+                            1039 | 1045 | 1046 | 1047 | 1052 | 1053 | 1054 => {
                                 // LevelEventHandler draws these from the client
                                 // level's random, not the server's.
                                 self.particles.level_random().next_float() * 0.1 + 0.9
